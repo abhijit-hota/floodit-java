@@ -89,19 +89,29 @@ public class FloodIt {
         } catch (Exception e) {
             return -1;
         }
+    }
 
+    private static int parseGridSizeFromArgs(String[] args) {
+        try {
+            if (args.length <= 0)
+                return 5;
+            int size = Math.max(5, Integer.parseInt(args[0]));
+            return size;
+        } catch (Exception e) {
+            return 5;
+        }
     }
 
     public static void main(String[] args) {
-        int n = Integer.parseInt(args[0]);
-        initialise(n);
+        int size = parseGridSizeFromArgs(args);
+        initialise(size);
 
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             Output.clearScreen();
             printGrid();
-            if (flooded.size() >= (n * n)) {
+            if (flooded.size() >= (size * size)) {
                 break;
             }
 
