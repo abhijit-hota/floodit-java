@@ -21,8 +21,15 @@ public class FloodIt {
         for (int i = 1; i < grid.length - 1; i++) {
             for (int j = 1; j < grid.length - 1; j++) {
                 int elem = grid[i][j];
-                Output.print(Integer.toString(elem), Output.Color.fromOrdinal(elem));
-                System.out.print(" ");
+                if (flooded.contains(Map.entry(i, j))) {
+                    Output.print("█", Output.Color.fromOrdinal(elem));
+                    Output.printBg(Integer.toString(elem), Output.Color.fromOrdinal(elem));
+                    Output.print("█", Output.Color.fromOrdinal(elem));
+                } else {
+                    System.out.print(" ");
+                    Output.print(Integer.toString(elem), Output.Color.fromOrdinal(elem));
+                    System.out.print(" ");
+                }
             }
             System.out.println();
         }
@@ -95,9 +102,12 @@ public class FloodIt {
 
         Scanner sc = new Scanner(System.in);
 
-        while (flooded.size() < (n * n)) {
+        while (true) {
             Output.clearScreen();
             printGrid();
+            if (flooded.size() >= (n * n)) {
+                break;
+            }
 
             while (true) {
                 System.out.println("Moves: " + moves + " | Flooded: " + flooded.size());
@@ -111,12 +121,10 @@ public class FloodIt {
                     playMove(nextMove);
                     break;
                 }
-
                 Output.clearLastLines(2);
             }
-
         }
-        Output.clearLastLines(1);
+        // Output.clearLastLines(1);
         System.out.println();
         System.out.println("You won in " + Integer.toString(moves) + " move(s).");
         System.out.print("Enter 's' to start again or any other key to quit. ");
