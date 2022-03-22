@@ -22,13 +22,9 @@ public class FloodIt {
             for (int j = 1; j < grid.length - 1; j++) {
                 int elem = grid[i][j];
                 if (flooded.contains(Map.entry(i, j))) {
-                    Output.print("█", Output.Color.fromOrdinal(elem));
-                    Output.printBg(Integer.toString(elem), Output.Color.fromOrdinal(elem));
-                    Output.print("█", Output.Color.fromOrdinal(elem));
+                    Output.print("███", Output.Color.fromOrdinal(elem));
                 } else {
-                    System.out.print(" ");
-                    Output.print(Integer.toString(elem), Output.Color.fromOrdinal(elem));
-                    System.out.print(" ");
+                    Output.print(" " + Integer.toString(elem) + " ", Output.Color.fromOrdinal(elem));
                 }
             }
             System.out.println();
